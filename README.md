@@ -30,7 +30,7 @@
 
 ## :rocket: Sobre o desafio
 
-Esse desafio consiste em converter o aplicativo desenvolvido no desafio do módulo anterior (App RocketShoes) para utilizar o React Hooks.
+Esse desafio consiste em converter o aplicativo desenvolvido no desafio do módulo anterior (O [App RocketShoes](https://github.com/desenv-marcelo-silva/bootcamp-desafio-07).) para utilizar o React Hooks.
 
 ## 📅 Entrega
 
