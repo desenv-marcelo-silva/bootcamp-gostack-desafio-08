@@ -30,7 +30,7 @@
 
 ## :rocket: Sobre o desafio
 
-Nesse desafio você deve converter a aplicação que você desenvolveu no desafio do módulo anterior para utilização de React Hooks.
+Esse desafio consiste em converter o aplicativo desenvolvido no desafio do módulo anterior (App RocketShoes) para utilizar o React Hooks.
 
 ## 📅 Entrega
 
@@ -42,4 +42,6 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 
 ---
 
-Feito com ♥ by Rocketseat :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
+Feito com ♥ by Marcelo Silva
+
+Inspirado no trabalho feito com ♥ by Rocketseat :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
