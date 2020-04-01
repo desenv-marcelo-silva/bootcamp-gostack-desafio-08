@@ -1,48 +1,54 @@
 import styled from 'styled-components/native';
-import colors from '../../styles/colors';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { TouchableOpacity } from 'react-native';
 
-import logo from '../../assets/logo.png';
-
-export const Wrapper = styled.SafeAreaView`
-  flex: 0;
-  background: ${colors.dark};
-  flex-direction: row;
-`;
+import logo from '../../assets/images/logo.png';
 
 export const Container = styled.View`
   flex-direction: row;
-  flex: 1;
+  align-items: center;
   justify-content: space-between;
+
   padding: 20px;
+  background: #000;
 `;
 
-export const Logo = styled.Image.attrs({
-  source: logo,
-  resizeMode: 'cover',
-})`
-  width: 185px;
-  height: 24px;
+export const IconCartArea = styled(TouchableOpacity)`
+  flex-direction: row;
+  width: 30px;
 `;
 
-export const BasketContainer = styled.TouchableOpacity`
+export const QuantityCart = styled.Text`
+  color: #fff;
   height: 24px;
   width: 24px;
-  flex: 1;
-  align-items: flex-end;
-  justify-content: flex-end;
+  background: #7159c1;
+  padding-left: 8px;
+  padding-top: 2px;
+  border-radius: 12px;
+  top: -15px;
+  left: -15px;
 `;
 
-export const ItemCount = styled.Text`
-  position: absolute;
-  text-align: center;
-  top: -8px;
-  right: -8px;
-  min-width: 18px;
-  min-height: 18px;
-  background: ${colors.primary};
+export const IconCart = styled(Icon).attrs({
+  name: 'shopping-cart',
+  size: 24,
+})`
   color: #fff;
-  font-size: 12px;
-  padding: 2px;
-  border-radius: 9px;
-  overflow: hidden;
+`;
+
+export const LogoArea = styled(TouchableOpacity)``;
+
+export const LogoApp = styled.Image.attrs({
+  resizeMode: 'cover',
+  source: logo,
+})`
+  width: 190px;
+  height: 25px;
+`;
+
+export const TitleApp = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
 `;

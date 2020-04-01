@@ -1,24 +1,38 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {
+  Container,
+  IconCartArea,
+  IconCart,
+  QuantityCart,
+  LogoArea,
+  LogoApp,
+} from './styles';
 
-import { Wrapper, Container, Logo, BasketContainer, ItemCount } from './styles';
-
-function Header({ navigation }) {
-  const cartSize = useSelector(state => state.cart.length);
-
+function HeaderApp({ navigation, totalItemCart }) {
   return (
-    <Wrapper>
-      <Container>
-        <Logo />
-        <BasketContainer onPress={() => navigation.navigate('Cart')}>
-          <Icon name="shopping-basket" color="#FFF" size={24} />
-          <ItemCount>{cartSize || 0}</ItemCount>
-        </BasketContainer>
-      </Container>
-    </Wrapper>
+    <Container>
+      <LogoArea
+        onPress={() => {
+          navigation.navigate('Home');
+        }}>
+        <LogoApp />
+      </LogoArea>
+      <IconCartArea
+        onPress={() => {
+          navigation.navigate('Cart');
+        }}>
+        <IconCart />
+        <QuantityCart>{totalItemCart || 0}</QuantityCart>
+      </IconCartArea>
+    </Container>
   );
 }
 
-export default Header;
+const mapStateToProps = (state, ownProps) => ({
+  totalItemCart: state.cart.length,
+  navigation: ownProps.navigation,
+});
+
+export default connect(mapStateToProps)(HeaderApp);
