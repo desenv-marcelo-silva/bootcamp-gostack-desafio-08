@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {
   Container,
@@ -10,19 +11,23 @@ import {
   LogoApp,
 } from './styles';
 
-function HeaderApp({ navigation, totalItemCart }) {
+export default function HeaderApp({ navigation }) {
+  const totalItemCart = useSelector(state => state.cart.length);
+
   return (
     <Container>
       <LogoArea
         onPress={() => {
           navigation.navigate('Home');
-        }}>
+        }}
+      >
         <LogoApp />
       </LogoArea>
       <IconCartArea
         onPress={() => {
           navigation.navigate('Cart');
-        }}>
+        }}
+      >
         <IconCart />
         <QuantityCart>{totalItemCart || 0}</QuantityCart>
       </IconCartArea>
@@ -30,9 +35,8 @@ function HeaderApp({ navigation, totalItemCart }) {
   );
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  totalItemCart: state.cart.length,
-  navigation: ownProps.navigation,
-});
-
-export default connect(mapStateToProps)(HeaderApp);
+HeaderApp.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};
