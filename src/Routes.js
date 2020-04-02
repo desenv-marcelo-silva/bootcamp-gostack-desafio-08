@@ -14,7 +14,8 @@ export default function Routes() {
         header: ({ navigation }) => {
           return <Header navigation={navigation} />;
         },
-      }}>
+      }}
+    >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Cart" component={Cart} />
     </Stack.Navigator>
