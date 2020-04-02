@@ -34,7 +34,7 @@ Esse desafio consiste em converter o aplicativo desenvolvido no desafio do módu
 
 ## 📅 Entrega
 
-Esse desafio **não precisa ser entregue** e não receberá correção, mas você pode ver o resultado do [código do desafio aqui](https://github.com/Rocketseat/bootcamp-gostack-desafio-08). Após concluir o desafio, adicionar esse código ao seu Github é uma boa forma de demonstrar seus conhecimentos para oportunidades futuras.
+Esse desafio não foi entregue porque não era necessário, porém o código original da Rocketseat pode ser visto aqui [código do desafio aqui](https://github.com/Rocketseat/bootcamp-gostack-desafio-08). 
 
 ## :memo: Licença
 
