@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import api from '../../services/api';
 
@@ -27,72 +26,73 @@ import {
   Price,
 } from './styles';
 
-class Home extends Component {
-  state = { products: [] };
+export default function Home({ navigation }) {
+  const [products, setProducts] = useState([]);
 
-  async componentDidMount() {
-    const response = await api.get('products');
-    const data = response.data.map(product => ({
-      ...product,
-      priceFormatted: formatPrice(product.price),
-    }));
+  const amount = useSelector(state =>
+    state.cart.reduce((sumAmount, product) => {
+      sumAmount[product.id] = product.amount;
 
-    this.setState({ products: data });
-  }
+      return sumAmount;
+    }, {})
+  );
 
-  handleAddCart = id => {
-    const { addToCartRequest, navigation } = this.props;
+  useEffect(() => {
+    async function loadProducts() {
+      const response = await api.get('/products');
+      const data = response.data.map(product => ({
+        ...product,
+        priceFormatted: formatPrice(product.price),
+      }));
 
-    addToCartRequest(id);
+      setProducts(data);
+    }
+
+    loadProducts();
+  }, []);
+
+  const dispatch = useDispatch();
+
+  function handleAddCart(id) {
+    dispatch(CartActions.addToCartRequest(id));
 
     navigation.navigate('Cart');
-  };
-
-  render() {
-    const { products } = this.state;
-    const { amount } = this.props;
-
-    return (
-      <Container>
-        <List>
-          <ProductList>
-            {products.map(product => (
-              <Product key={product.id}>
-                <AreaPhoto>
-                  <Image source={{ uri: product.image }} />
-                </AreaPhoto>
-
-                <AreaPriceTitle>
-                  <Title>{product.title}</Title>
-                  <Price>{product.priceFormatted}</Price>
-                </AreaPriceTitle>
-
-                <AreaButton>
-                  <IconArea>
-                    <Icon name="add-shopping-cart" size={20} color="#FFF" />
-                    <Quantity>{amount[product.id] || 0}</Quantity>
-                  </IconArea>
-                  <ButtonAddCart onPress={() => this.handleAddCart(product.id)}>
-                    <ButtonAddCartText>Adicionar ao carrinho</ButtonAddCartText>
-                  </ButtonAddCart>
-                </AreaButton>
-              </Product>
-            ))}
-          </ProductList>
-        </List>
-      </Container>
-    );
   }
+
+  return (
+    <Container>
+      <List>
+        <ProductList>
+          {products.map(product => (
+            <Product key={product.id}>
+              <AreaPhoto>
+                <Image source={{ uri: product.image }} />
+              </AreaPhoto>
+
+              <AreaPriceTitle>
+                <Title>{product.title}</Title>
+                <Price>{product.priceFormatted}</Price>
+              </AreaPriceTitle>
+
+              <AreaButton>
+                <IconArea>
+                  <Icon name="add-shopping-cart" size={20} color="#FFF" />
+                  <Quantity>{(amount && amount[product.id]) || 0}</Quantity>
+                </IconArea>
+                <ButtonAddCart onPress={() => handleAddCart(product.id)}>
+                  <ButtonAddCartText>Adicionar ao carrinho</ButtonAddCartText>
+                </ButtonAddCart>
+              </AreaButton>
+            </Product>
+          ))}
+        </ProductList>
+      </List>
+    </Container>
+  );
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(CartActions, dispatch);
-
-const mapStateToProps = state => ({
-  amount: state.cart.reduce((amount, product) => {
-    amount[product.id] = product.amount;
-    return amount;
-  }, {}),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+Home.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};
