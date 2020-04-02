@@ -37,9 +37,9 @@ export const Title = styled.Text.attrs({
   numberOfLines: 2,
 })`
   font-size: 15px;
-  text-align: justify;
   margin-left: 10px;
   line-height: 20px;
+  height: 40px;
 `;
 
 export const Price = styled.Text`
